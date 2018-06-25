@@ -37,7 +37,15 @@ namespace StationaryWinForm
 
             lstBrands.DataSource = null;
 
-            lstBrands.DataSource = await ServiceClient.GetBrandNamesAsync();
+            try
+            {
+                lstBrands.DataSource = await ServiceClient.GetBrandNamesAsync();
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Check SelfHost?");
+                Close();
+            }
         }
 
         private void ViewBrand()
